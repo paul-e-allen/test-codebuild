@@ -14,7 +14,7 @@ phases:
       - aws --version
       - python3 --version
       - pip3 --version
-      - pip3 install awsebcli --upgrade
+      # - pip3 install awsebcli --upgrade
       - eb --version
   pre_build:
     commands:
