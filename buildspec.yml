@@ -1,0 +1,32 @@
+version: 0.2
+
+env:
+  variables:
+    ENVIRONMENT: development
+    GIT_BRANCH: master
+  git-credential-helper: yes
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.8
+    commands:
+      - aws --version
+      - python3 --version
+      - pip3 --version
+      - pip3 install awsebcli --upgrade
+      - eb --version
+  pre_build:
+    commands:
+      - git config user.email "pea1@cornell.edu"
+      - git config user.name "Paul Allen"
+      - git checkout $GIT_BRANCH
+      - git status
+      - eb init --keyname $SSH_KEY --platform "ruby-2.6-(puma)" --region us-east-1
+      - export AWS_ACCOUNT=$(aws sts get-caller-identity --query Account --output text)
+
+  # build:
+  #   commands:
+  #     - git add .
+  #     - git diff-index --quiet HEAD || git commit -m "commit to pick up changes for eb cli"
+
