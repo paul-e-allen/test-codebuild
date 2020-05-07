@@ -4,6 +4,7 @@ env:
   variables:
     ENVIRONMENT: development
     GIT_BRANCH: master
+    SSH_KEY: pea1
   git-credential-helper: yes
 
 phases:
